@@ -1,0 +1,107 @@
+<h1>read-dir</h1>
+<p>A cli tool to read directories.</p>
+<h2>Overview:</h2>
+<ul>
+<li>The Directory Info CLI is a command-line tool designed to provide detailed information about files and directories within a specified directory. It displays valuable insights such as type (file or directory), size in bytes, modification time (mtime), permissions, and creation time (btime).</li>
+</ul>
+<h2>Installation:</h2>
+<p>To use the Directory Info CLI, follow these steps:</p>
+<ul>
+<li>Install the package : <code>npm i read-dir</code></li>
+<li>Run the command: <code>show-info &lt;directory path&gt;</code></li>
+</ul>
+<h2>Usage:</h2>
+<p>The primary command provided by the tool is show_info. When executed, it will display a table with the following columns:</p>
+<ul>
+<li><strong>Name</strong>: The name of the file or directory.</li>
+<li><strong>Type</strong>: Indicates whether it is a file or a directory.</li>
+<li><strong>Size (bytes)</strong>: The size of the file in bytes. For directories, this represents the total size of all contents within.</li>
+<li><strong>Modification Time (mtime)</strong>: The timestamp of the last modification made to the file.</li>
+<li><strong>Permissions</strong>: The file's permission settings, showing read (r), write (w), and execute (x) permissions.</li>
+<li><strong>Creation Time (btime)</strong>: The timestamp indicating when the file was originally created.</li>
+</ul>
+<h2>Example output:</h2>
+<ul>
+<li>
+<p><strong>Name</strong>: directory.js</p>
+<ul>
+<li><strong>Type</strong>: file</li>
+<li><strong>Size (bytes)</strong>: 619</li>
+<li><strong>Modification Time (<code>mtime</code>)</strong>: 11/2/2023T7:25:33 PM</li>
+<li><strong>Permissions</strong>: rw-rw-r--</li>
+<li><strong>Creation Time (<code>btime</code>)</strong>: 11/2/2023T5:42:24 PM</li>
+</ul>
+</li>
+<li>
+<p><strong>Name</strong>: index.js</p>
+<ul>
+<li><strong>Type</strong>: file</li>
+<li><strong>Size (bytes)</strong>: 2660</li>
+<li><strong>Modification Time (<code>mtime</code>)</strong>: 11/2/2023T9:50:29 PM</li>
+<li><strong>Permissions</strong>: rw-rw-r--</li>
+<li><strong>Creation Time (<code>btime</code>)</strong>: 11/1/2023T11:44:45 PM</li>
+</ul>
+</li>
+<li>
+<p><strong>Name</strong>: .gitignore</p>
+<ul>
+<li><strong>Type</strong>: file</li>
+<li><strong>Size (bytes)</strong>: 13</li>
+<li><strong>Modification Time (<code>mtime</code>)</strong>: 11/2/2023T9:56:43 PM</li>
+<li><strong>Permissions</strong>: rw-rw-r--</li>
+<li><strong>Creation Time (<code>btime</code>)</strong>: 11/2/2023T9:56:28 PM</li>
+</ul>
+</li>
+<li>
+<p><strong>Name</strong>: node_modules</p>
+<ul>
+<li><strong>Type</strong>: dir</li>
+<li><strong>Size (bytes)</strong>: 1910772</li>
+<li><strong>Modification Time (<code>mtime</code>)</strong>: 11/2/2023T9:27:38 PM</li>
+<li><strong>Permissions</strong>: rwxrwxr-x</li>
+<li><strong>Creation Time (<code>btime</code>)</strong>: 11/2/2023T12:57:53 AM</li>
+</ul>
+</li>
+<li>
+<p><strong>Name</strong>: package-lock.json</p>
+<ul>
+<li><strong>Type</strong>: file</li>
+<li><strong>Size (bytes)</strong>: 11118</li>
+<li><strong>Modification Time (<code>mtime</code>)</strong>: 11/2/2023T9:27:38 PM</li>
+<li><strong>Permissions</strong>: rw-rw-r--</li>
+<li><strong>Creation Time (<code>btime</code>)</strong>: 11/2/2023T12:57:53 AM</li>
+</ul>
+</li>
+<li>
+<p><strong>Name</strong>: package.json</p>
+<ul>
+<li><strong>Type</strong>: file</li>
+<li><strong>Size (bytes)</strong>: 276</li>
+<li><strong>Modification Time (<code>mtime</code>)</strong>: 11/2/2023T9:27:38 PM</li>
+<li><strong>Permissions</strong>: rw-rw-r--</li>
+<li><strong>Creation Time (<code>btime</code>)</strong>: 11/1/2023T11:44:38 PM</li>
+</ul>
+</li>
+<li>
+<p><strong>Name</strong>: readme.md</p>
+<ul>
+<li><strong>Type</strong>: file</li>
+<li><strong>Size (bytes)</strong>: 0</li>
+<li><strong>Modification Time (<code>mtime</code>)</strong>: 11/2/2023T9:56:52 PM</li>
+<li><strong>Permissions</strong>: rw-rw-r--</li>
+<li><strong>Creation Time (<code>btime</code>)</strong>: 11/2/2023T9:56:52 PM</li>
+</ul>
+</li>
+</ul>
+<h2>Acknowledgments:</h2>
+<ul>
+<li>This tool was developed to provide quick and informative insights into file and directory attributes.</li>
+<li>Special thanks to the Node.js community for creating and maintaining the <code>fs</code> module, which enables access to file system information.</li>
+</ul>
+<h2>Feedback and Contributions</h2>
+<p>Feedback, bug reports, and contributions are welcome! Feel free to open an issue or create a pull request.</p>
+<hr>
+<p><strong>Disclaimer</strong>: This tool provides information based on the available file system metadata. Some file systems or platforms may not support all timestamps. Use this tool at your own discretion.</p>
+<h2>Repository</h2>
+<p>The source code for this project is available on <a href="https://github.com/Surajchandraa/read-dir">GitHub</a>.</p>
+<p>Feel free to open issues, submit pull requests, or explore the codebase.</p>
