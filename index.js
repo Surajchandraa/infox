@@ -29,13 +29,27 @@ fs.readdir(directorypath,(err,files)=>{
 
             if(stats.isDirectory()){
                 let dirsize = for_directory(paths);
+                let unit='byte'
+                if(dirsize>=1048576){
+                    dirsize=(dirsize/1048576).toFixed(1);
+                    unit='mb'
+                }
+                else{
+                dirsize=(dirsize/4096).toFixed(1);
+                unit='kb'
+
+                }
                 let dir_lmd = stats.mtime.toLocaleDateString();
+
                 let dir_lmt=stats.mtime.toLocaleTimeString();
+
                 let per=getPermissionsString(stats.mode);
+
                 let dir_crd=stats.birthtime.toLocaleDateString();
+                
                 let dir_crt=stats.birthtime.toLocaleTimeString();
                 infoobj[file] = { 'type':'dir',
-                'size/bytes': dirsize, 
+                'size': `${dirsize} ${unit}`, 
                 'mtime': `${dir_lmd}T${dir_lmt}`,
                 'permissions':per,
                 'btime':`${dir_crd}T${dir_crt}` };
@@ -47,13 +61,31 @@ fs.readdir(directorypath,(err,files)=>{
                     
             }
             else{
+
+                
                 let fileSize = stats.size;
+                let unit ='b';
+
+                if(fileSize>=1024){
+                    fileSize=(fileSize/1024).toFixed(1);
+                    unit='kb'
+                }
+
                 let lastModified = stats.mtime.toLocaleDateString();
+
                 let lastModified_time=stats.mtime.toLocaleTimeString();
+
                 let permissions=getPermissionsString(stats.mode);
+
                 let ctimee=stats.birthtime.toLocaleDateString();
+
                 let ctime_time=stats.birthtime.toLocaleTimeString();
-                infoobj[file] = { 'type':'file','size/bytes': fileSize, 'mtime': `${lastModified}T${lastModified_time}`,'permissions':permissions,'btime':`${ctimee}T${ctime_time}` };
+
+                infoobj[file] = { 'type':'file',
+                'size': `${fileSize} ${unit}`, 
+                'mtime': `${lastModified}T${lastModified_time}`,
+                'permissions':permissions,
+                'btime':`${ctimee}T${ctime_time}` };
                 fileprocessed++;
 
                 if (fileprocessed === files.length) {
