@@ -24,6 +24,9 @@ To use the Directory Info CLI, follow these steps:
 - ***btime** : Get birth times of files.
 - ***permission** : Show permissions for files and directories.
 - ***all** : Display all available information in a table.
+- ***path** : Display paths of files or subdirectories.
+- ***file** : details of a specific file.
+- ***content** : content of a specific file.
 
 ## Examples 1:
 - ***command***-
@@ -57,6 +60,37 @@ show-info path /home/suraj/Desktop/packages/quick-compress/
 - ***output***-
 ![Screenshot](images/path_output.png)
 
+
+## Example 4:
+- ***command***-
+- here we will use filepath instead of directory path for the information of a specific file.
+```bash
+show-info file /home/suraj/Desktop/packages/quick-compress/LICENCE.md
+
+```
+
+- ***output**-
+```bash
+    'LICENCE.md': {
+    type: 'file',
+    size: '1.0 kb',
+    mtime: '11/6/2023 T 1:23:16 PM',
+    permissions: 'rw-rw-r--',
+    btime: '11/6/2023 T 1:23:10 PM',
+    path: '/home/suraj/Desktop/packages/quick-compress/LICENCE.md' }
+
+```
+
+## Example 5:
+- ***command***-
+- here we will use filepath instead of directory path for the content of a specific file.
+```bash
+show-info content /home/suraj/Desktop/packages/quick-compress/LICENCE.md
+
+```
+
+- ***output***-
+![Screenshot](images/content_output.png)
 
 
 ## Acknowledgments:

@@ -7,6 +7,7 @@ const {printsize,printmtime,printbtime,permission,paths}= require('./content')
 
 
 let infoobj ={};
+let specific={};
 let fileprocessed=0;
 function directorycontent(directorypath,callback){
    
@@ -121,6 +122,96 @@ function getPermissionsString(mode) {
 
 
 
+
+
+
+
+function specific_file(file_path,callback){
+        fs.stat(file_path,(err,stats)=>{
+            if(err){
+                console.log("cant get file info");
+                return callback(err,null)
+            }
+                let file = path.basename(file_path)
+                let fileSize = stats.size;
+                let unit ='b';
+
+                if(fileSize>=1024){
+                    fileSize=(fileSize/1024).toFixed(1);
+                    unit='kb'
+                }
+
+                let lastModified = stats.mtime.toLocaleDateString();
+
+                let lastModified_time=stats.mtime.toLocaleTimeString();
+
+                let permissions=getPermissionsString(stats.mode);
+
+                let ctimee=stats.birthtime.toLocaleDateString();
+
+                let ctime_time=stats.birthtime.toLocaleTimeString();
+
+                specific[file] = { 'type':'file',
+                'size': `${fileSize} ${unit}`, 
+                'mtime': `${lastModified} T ${lastModified_time}`,
+                'permissions':permissions,
+                'btime':`${ctimee} T ${ctime_time}`,
+                'path':`${file_path}` };
+
+                return callback(null,specific);
+            
+
+        
+    })
+}  
+
+
+
+
+
+
+function file_content(file_path,callback){
+    try {
+        const data = fs.readFileSync(file_path, 'utf8');
+        callback(null,data)
+      } catch (err) {
+        callback(err,null)
+      }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let input=process.argv[2];
 let givepath=process.argv[3];
 
@@ -180,6 +271,26 @@ else if(input==='path'){
         paths(infoobj)
     })
 }
+else if(input==='file'){
+    specific_file(givepath,(err,specific)=>{
+        if(err){
+            console.error(err);
+            return;
+        }
+        console.log(specific);
+    })
+}
+
+else if(input==='content'){
+    file_content(givepath,(err,data)=>{
+        if(err){
+            console.error(err);
+            return;
+        }
+        console.log(data);
+    })
+}
+
 else{
     console.log("invalid command")
 }
