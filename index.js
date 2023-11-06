@@ -2,19 +2,20 @@
 const fs = require('fs');
 const path = require('path');
 const for_directory=require('./directory');
+const {printsize,printmtime,printbtime,permission,paths}= require('./content')
 
 
 
 let infoobj ={};
 let fileprocessed=0;
-function directorycontent(directorypath){
+function directorycontent(directorypath,callback){
    
 
 
 fs.readdir(directorypath,(err,files)=>{
     if(err){
         console.log("unable to loading the files");
-        return 
+        return callback(err);
     }
    
     files.forEach(file=>{
@@ -50,13 +51,14 @@ fs.readdir(directorypath,(err,files)=>{
                 let dir_crt=stats.birthtime.toLocaleTimeString();
                 infoobj[file] = { 'type':'dir',
                 'size': `${dirsize} ${unit}`, 
-                'mtime': `${dir_lmd}T${dir_lmt}`,
+                'mtime': `${dir_lmd} T ${dir_lmt}`,
                 'permissions':per,
-                'btime':`${dir_crd}T${dir_crt}` };
+                'btime':`${dir_crd} T ${dir_crt}`,
+                'path':`${paths}` };
                     fileprocessed++;
 
                     if (fileprocessed === files.length) {
-                        console.table(infoobj);
+                        callback(null, infoobj);
                     }
                     
             }
@@ -83,13 +85,14 @@ fs.readdir(directorypath,(err,files)=>{
 
                 infoobj[file] = { 'type':'file',
                 'size': `${fileSize} ${unit}`, 
-                'mtime': `${lastModified}T${lastModified_time}`,
+                'mtime': `${lastModified} T ${lastModified_time}`,
                 'permissions':permissions,
-                'btime':`${ctimee}T${ctime_time}` };
+                'btime':`${ctimee} T ${ctime_time}`,
+                'path':`${paths}` };
                 fileprocessed++;
 
                 if (fileprocessed === files.length) {
-                    console.table(infoobj);
+                    callback(null, infoobj);
                 }
                 
             }
@@ -118,6 +121,65 @@ function getPermissionsString(mode) {
 
 
 
+let input=process.argv[2];
+let givepath=process.argv[3];
 
-let givepath=process.argv[2];
-directorycontent(givepath)
+
+
+if (input === 'size') {
+    directorycontent(givepath, (err, infoobj) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        printsize(infoobj)
+    });
+}
+else if(input==='permission'){
+    directorycontent(givepath,(err,infoobj)=>{
+        if(err){
+            console.error(err);
+            return;
+        }
+        permission(infoobj)
+    })
+}
+else if(input==='mtime'){
+    directorycontent(givepath,(err,infoobj)=>{
+        if(err){
+            console.error(err);
+            return;
+        }
+        printmtime(infoobj)
+    })
+}
+else if(input==='btime'){
+    directorycontent(givepath,(err,infoobj)=>{
+        if(err){
+            console.error(err);
+            return;
+        }
+        printbtime(infoobj)
+    })
+}
+else if(input==='all'){
+    directorycontent(givepath,(err,infoobj)=>{
+        if(err){
+            console.error(err);
+            return;
+        }
+        console.table(infoobj)
+    })
+}
+else if(input==='path'){
+    directorycontent(givepath,(err,infoobj)=>{
+        if(err){
+            console.error(err);
+            return;
+        }
+        paths(infoobj)
+    })
+}
+else{
+    console.log("invalid command")
+}

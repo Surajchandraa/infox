@@ -1,15 +1,20 @@
 {
   "name": "infox",
   "version": "1.0.0",
-  "description": "",
+  "description": "A command-line utility to retrieve detailed information about files and directories.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["file", "info", "utility", "command-line", "node"],
   "author": "suraj chandra",
-  "license": "ISC",
+  "license": "MIT",
   "bin": {
     "show-info": "./index.js"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Surajchandraa/infox.git"
+  },
+  "homepage": "https://github.com/Surajchandraa/infox"
 }
